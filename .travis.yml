@@ -5,5 +5,5 @@ install:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker tag app $DOCKER_USERNAME/cross-out-memes
+  - docker build -t  $DOCKER_USERNAME/cross-out-memes:latest .
   - docker push $DOCKER_USERNAME/cross-out-memes
