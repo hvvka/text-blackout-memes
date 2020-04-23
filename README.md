@@ -1,6 +1,6 @@
 # cross-out-memes
 
-Find out what are possibilities to create meme 
+Find out what are possibilities to create a meme 
 by crossing-out letters from text on image.
 
 | Not funny             |  Funny |
@@ -50,3 +50,20 @@ Optional
 $ docker build -t memes_image .
 $ docker run -it --name memes_container memes_image
 ```
+
+## Usage notes
+
+### [find_words](find_words.py)
+
+Checks **input string** for a given **file with dictionary words** and outputs whether there **are present in string + their positions**.
+
+I.e. `default_string` in [find_words.py](find_words.py) for given [slangs.txt](resources/slangs.txt) outputs [output.txt](resources/output.txt).
+
+3 arguments are possible, but optional:
+
+- _--input_ – input string, default: "wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywrocławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez"
+
+- _--dict_ – file with dictionary words, default: `resources/slangs.txt`
+
+- _--out_ – output file, default: `resources/output.txt`
+ 

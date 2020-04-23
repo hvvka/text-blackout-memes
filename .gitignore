@@ -138,5 +138,6 @@ dmypy.json
 /httpRequests/
 .idea/
 *.iml
+.DS_Store
 
 resources/config.json
