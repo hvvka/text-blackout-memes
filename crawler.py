@@ -3,22 +3,23 @@ import requests
 from lxml import html
 import utils
 
+
 def crawl_slangs():
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
-    allSlangs = []
+    all_slangs = []
     for letter in tqdm(alphabet):
-        pageNumber = 0
-        page = requests.get(f'https://www.miejski.pl/{letter}-{pageNumber}.html')
+        page_number = 0
+        page = requests.get(f'https://www.miejski.pl/{letter}-{page_number}.html')
 
         while page.status_code == 200:
             slangs = html.fromstring(page.content).xpath('//ul[@id="simple-link-list"]/li/a/text()')
-            allSlangs.extend(slangs)
-            pageNumber += 1
-            page = requests.get(f'https://www.miejski.pl/{letter}-{pageNumber}.html')
+            all_slangs.extend(slangs)
+            page_number += 1
+            page = requests.get(f'https://www.miejski.pl/{letter}-{page_number}.html')
 
-    return allSlangs
+    return all_slangs
+
 
 if __name__ == '__main__':
-    allSlangs = crawl_slangs()
-    utils.save_array(allSlangs, 'slangs.txt')
-
+    all_slangs = crawl_slangs()
+    utils.save_array(all_slangs, 'slangs.txt')
