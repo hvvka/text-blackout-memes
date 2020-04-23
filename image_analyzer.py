@@ -3,7 +3,7 @@ from pytesseract import Output
 from PIL import Image, ImageDraw, ImageFilter
 import os
 import json
-import utils
+from util import utils
 from rectangle import Rectangle
 
 if os.path.isfile('resources/config.json'):
