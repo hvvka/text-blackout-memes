@@ -1,3 +1,6 @@
+import crawler
+import utils
+
 def includes_word(input, word):
     letter_index = []
     current_letter = 0
@@ -19,8 +22,7 @@ if __name__ == '__main__':
             "ławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez "
     # includes_word(input, "walewiadro")
 
-    input_file = open('slangs.txt', 'r')
-    lines = input_file.readlines()
+    lines = utils.read_array('slangs.txt')
 
     output_file = open("output.txt", "w+")
     for line in lines:
@@ -28,3 +30,7 @@ if __name__ == '__main__':
         if output:
             word, indices = output
             output_file.write(word + " " + str(indices) + "\n")
+    
+    #START CRAWLING AGAIN
+    #allSlangs = crawler.crawl_slangs()
+    #utils.save_array(allSlangs, 'slangs.txt')
