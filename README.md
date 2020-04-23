@@ -46,7 +46,9 @@ Windows
 
 ## Using Docker
 
-Optional
+Image available at https://hub.docker.com/repository/docker/hvvka/cross-out-memes
+
+### Build locally
 
 ```bash
 $ docker build -t memes_image .
@@ -71,3 +73,7 @@ I.e. `default_string` in [find_words.py](find_words.py) for given [slangs.txt](r
 
 If dictionary file is not present, then it uses [polish_slang_crawler](util/polish_slang_crawler.py) script to fetch words.
 The script can we modified to use different source.
+
+### [image_analyzer](image_analyzer.py)
+
+// todo
