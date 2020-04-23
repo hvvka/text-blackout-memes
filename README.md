@@ -59,13 +59,13 @@ $ docker run -it --name memes_container memes_image
 
 ### [find_words](find_words.py)
 
-Checks **input string** for a given **file with dictionary words** and outputs whether there **are present in string + their positions**.
+Checks **input string** for a given **file with dictionary words** and outputs those which **are present in string + their positions**.
 
 I.e. `default_string` in [find_words.py](find_words.py) for given [slangs.txt](resources/slangs.txt) outputs [output.txt](resources/output.txt).
 
 3 arguments are possible, but optional:
 
-- _--input_ – input string, default: "wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywrocławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez"
+- _--input_ – input string provided from image, default: `wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywrocławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez`
 
 - _--dict_ – file with dictionary words, default: `resources/slangs.txt`
 
@@ -74,8 +74,11 @@ I.e. `default_string` in [find_words.py](find_words.py) for given [slangs.txt](r
 If dictionary file is not present, then it uses [polish_slang_crawler](util/polish_slang_crawler.py) script to fetch words.
 The script can we modified to use different source.
 
+Use output file to find the most suitable phrase and modify the image manually. 
+
 ### [image_analyzer](image_analyzer.py)
 
-// todo
-For now:
-1. Just run `py image_anaylzer.py` and wait for gigabytes of data with mentzen memes
+Manual image modification is not required with this one.
+
+1. Run [image_anaylzer.py](image_analyzer.py) and wait for gigabytes of data with mentzen memes
+
