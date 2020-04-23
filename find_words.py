@@ -32,8 +32,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=default_string, help="input string")
-    parser.add_argument("--dict", default="slangs.txt", help="dictionary file path (optional)")
-    parser.add_argument("--out", default="output.txt", help="output file path (optional)")
+    parser.add_argument("--dict", default="resources/slangs.txt", help="dictionary file path (optional)")
+    parser.add_argument("--out", default="resources/output.txt", help="output file path (optional)")
     args = parser.parse_args()
 
     cmd_line_args = list()
@@ -53,6 +53,6 @@ if __name__ == '__main__':
             word, indices = output
             output_file.write(line.strip() + " " + str(indices) + "\n")
 
-    #START CRAWLING AGAIN
-    #allSlangs = crawler.crawl_slangs()
-    #utils.save_array(allSlangs, 'slangs.txt')
+    # START CRAWLING AGAIN
+    # all_slangs = crawler.crawl_slangs()
+    # utils.save_array(all_slangs, 'resources/slangs.txt')

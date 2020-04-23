@@ -4,8 +4,8 @@ from PIL import Image, ImageDraw
 import os
 import json
 
-if os.path.isfile('config.json'):
-    with open(os.path.join(os.path.dirname(__file__), 'config.json')) as json_file:
+if os.path.isfile('resources/config.json'):
+    with open(os.path.join(os.path.dirname(__file__), 'resources/config.json')) as json_file:
         data = json.load(json_file)
         pytesseract.pytesseract.tesseract_cmd = data['pytesseractPath']
 

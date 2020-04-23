@@ -22,4 +22,4 @@ def crawl_slangs():
 
 if __name__ == '__main__':
     all_slangs = crawl_slangs()
-    utils.save_array(all_slangs, 'slangs.txt')
+    utils.save_array(all_slangs, 'resources/slangs.txt')

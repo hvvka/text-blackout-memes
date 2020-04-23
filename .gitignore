@@ -139,4 +139,4 @@ dmypy.json
 .idea/
 *.iml
 
-config.json
+resources/config.json
