@@ -1,5 +1,8 @@
+import os
+
+from util import utils
+from util import polish_slang_crawler
 import crawler
-import utils
 import argparse
 import logging
 
@@ -33,6 +36,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=default_string, help="input string")
     parser.add_argument("--dict", default="resources/slangs.txt", help="dictionary file path (optional)")
+    # if slangs not present, then crawl
     parser.add_argument("--out", default="resources/output.txt", help="output file path (optional)")
     args = parser.parse_args()
 
@@ -44,6 +48,8 @@ if __name__ == '__main__':
     LOG.debug("Parsed args: %s", cmd_line_args)
     input_string, dictionary_path, output_path = cmd_line_args
 
+    if not os.path.isfile(dictionary_path):
+        polish_slang_crawler.crawl_and_save(dictionary_path)
     lines = utils.read_array(dictionary_path)
 
     output_file = open(output_path, "w+")

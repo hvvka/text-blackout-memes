@@ -1,4 +1,6 @@
-tqdm
-Pillow
-requests
-pytesseract
+tqdm~=4.45.0
+Pillow~=7.1.1
+requests~=2.23.0
+pytesseract~=0.3.4
+setuptools~=46.1.3
+lxml~=4.5.0

@@ -1,7 +1,7 @@
 from tqdm import tqdm
 import requests
 from lxml import html
-import utils
+from util import utils
 
 
 def crawl_slangs():
@@ -20,6 +20,6 @@ def crawl_slangs():
     return all_slangs
 
 
-if __name__ == '__main__':
+def crawl_and_save(file):
     all_slangs = crawl_slangs()
-    utils.save_array(all_slangs, 'resources/slangs.txt')
+    utils.save_array(all_slangs, file)

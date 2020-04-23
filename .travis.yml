@@ -1,0 +1,9 @@
+language: python
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker tag app $DOCKER_USERNAME/cross-out-memes
+  - docker push $DOCKER_USERNAME/cross-out-memes

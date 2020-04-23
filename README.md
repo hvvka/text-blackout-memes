@@ -66,4 +66,6 @@ I.e. `default_string` in [find_words.py](find_words.py) for given [slangs.txt](r
 - _--dict_ – file with dictionary words, default: `resources/slangs.txt`
 
 - _--out_ – output file, default: `resources/output.txt`
- 
+
+If dictionary file is not present, then it uses [polish_slang_crawler](util/polish_slang_crawler.py) script to fetch words.
+The script can we modified to use different source.
