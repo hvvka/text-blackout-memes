@@ -11,16 +11,20 @@ def includes_word(input, word):
 
     is_word_present = current_letter == len(word)
     if is_word_present:
-        print(letter_index)
+        return word, letter_index
 
 
 if __name__ == '__main__':
-    input = "wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywroc" \
+    input_string = "wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywroc" \
             "ławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez "
     # includes_word(input, "walewiadro")
 
-    fp = open('slangs.txt', 'r')
-    lines = fp.readlines()
+    input_file = open('slangs.txt', 'r')
+    lines = input_file.readlines()
 
+    output_file = open("output.txt", "w+")
     for line in lines:
-        includes_word(input, line.strip().lower())
+        output = includes_word(input_string, line.strip().lower().replace(" ", ""))
+        if output:
+            word, indices = output
+            output_file.write(word + " " + str(indices) + "\n")
