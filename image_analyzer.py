@@ -3,6 +3,7 @@ from pytesseract import Output
 from PIL import Image, ImageDraw
 import os
 import json
+from rectangle import Rectangle
 
 if os.path.isfile('resources/config.json'):
     with open(os.path.join(os.path.dirname(__file__), 'resources/config.json')) as json_file:
@@ -45,6 +46,15 @@ def get_boxes_from_image(file_name):
         result.append((d['char'][i], d['left'][i], d['top'][i], d['right'][i], d['bottom'][i]))
     return result
 
+def get_difference_with(rectangle, visible_rectangles):
+    #print(rectangle)
+    processed_rectangle = Rectangle(int(rectangle[0]), int(rectangle[3]), int(rectangle[2]), int(rectangle[1]))
+    difference_rects = []
+    for visible_rect in visible_rectangles:
+        b = Rectangle(int(visible_rect[1]), int(visible_rect[4]), int(visible_rect[3]), int(visible_rect[2]))
+        difference_rects.extend(list(processed_rectangle - b))
+    return set(difference_rects)
+
 
 # THIS SHOULD BE GET CROSSED IMAGE AND USED IN A LOOP WITH ALL POSSIBLE MATCHES
 def show_crossed_image(word, original_image, fill_color):
@@ -56,13 +66,25 @@ def show_crossed_image(word, original_image, fill_color):
     marked_letters_set = set(word[1])
     width, height = original_image.size
     draw = ImageDraw.Draw(original_image)
-    print(all_boxes_set)
+    #print(all_boxes_set)
     for box in all_boxes_set:
         (x1, y2, x2, y1) = (box[1], box[2], box[3], box[4])
         if box not in marked_letters_set:
-            draw.rectangle([(x1, height - y1), (x2, height - y2)], fill=fill_color)
+            difference = get_difference_with((box[1], box[2], box[3], box[4]), marked_letters_set)
+            #print(difference)
+            if len(difference) > 1:
+                print('overlapped:', box[0])
+                for diff_rect in difference:
+                    draw.rectangle([(diff_rect.x1, height - diff_rect.y1), (diff_rect.x2, height - diff_rect.y2)], outline = "#00FF00")
+            else:
+                for diff_rect in difference:
+                    draw.rectangle([(diff_rect.x1, height - diff_rect.y1), (diff_rect.x2, height - diff_rect.y2)], fill = fill_color)
+            # for diff_rect in difference:
+            #     draw.rectangle([(diff_rect.x1, height - diff_rect.y1), (diff_rect.x2, height - diff_rect.y2)], fill = fill_color)
         else:
-            draw.rectangle([(x1, height - y1), (x2, height - y2)], outline="#FF0000")
+            print('found:', box[0])
+            draw.rectangle([(x1, height - y1), (x2, height - y2)], outline = "#FF0000")
+
     original_image.show()
 
 
