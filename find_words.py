@@ -10,10 +10,17 @@ def includes_word(input, word):
                 break
 
     is_word_present = current_letter == len(word)
-    print(is_word_present, letter_index)
+    if is_word_present:
+        print(letter_index)
 
 
 if __name__ == '__main__':
     input = "wałpzwpowodzoadinisttojewódzkizarządmelioracjiiurządzeńwodnywroc" \
             "ławulmatejki5aazrozkopywaniawbijanisszkadzaadarninyiinnychnpodstaapaez "
-    includes_word(input, "walewiadro")
+    # includes_word(input, "walewiadro")
+
+    fp = open('slangs.txt', 'r')
+    lines = fp.readlines()
+
+    for line in lines:
+        includes_word(input, line.strip().lower())
