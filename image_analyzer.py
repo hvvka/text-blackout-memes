@@ -4,25 +4,26 @@ from PIL import Image, ImageDraw
 import os
 import json
 
-with open(os.path.join(os.path.dirname(__file__), 'config.json')) as json_file:
-    data = json.load(json_file)
-    pytesseract.pytesseract.tesseract_cmd = data['pytesseractPath']
+if os.path.isfile('config.json'):
+    with open(os.path.join(os.path.dirname(__file__), 'config.json')) as json_file:
+        data = json.load(json_file)
+        pytesseract.pytesseract.tesseract_cmd = data['pytesseractPath']
 
 
 def includes_word(data, word):
     data_iterator = -1
     word_counter = 0
-    indexes = []
+    indices = []
     for char in word:
         while data_iterator < len(data) - 1:
             data_iterator += 1
             if char == data[data_iterator][0]:
                 word_counter += 1
-                indexes.append(data[data_iterator])
+                indices.append(data[data_iterator])
                 break
 
     if word_counter == len(word):
-        return True, indexes
+        return True, indices
     return False, []
 
 
@@ -67,6 +68,6 @@ def show_crossed_image(word, original_image, fill_color):
 
 if __name__ == '__main__':
     all_slangs = ['lewak', 'heh', 'Zawias']
-    image_path = r'.\memes\metzen.png'
+    image_path = "./memes/metzen.png"
     matches = get_slangs_matches(all_slangs, get_boxes_from_image(image_path))
     show_crossed_image(matches[0], Image.open(image_path), '#16202C')
