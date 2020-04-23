@@ -5,25 +5,28 @@ import os
 import json
 from rectangle import Rectangle
 
-with open(os.path.join(os.path.dirname(__file__), 'config.json')) as json_file:  
-    data = json.load(json_file)
-    pytesseract.pytesseract.tesseract_cmd = data['pytesseractPath']
+if os.path.isfile('resources/config.json'):
+    with open(os.path.join(os.path.dirname(__file__), 'resources/config.json')) as json_file:
+        data = json.load(json_file)
+        pytesseract.pytesseract.tesseract_cmd = data['pytesseractPath']
+
 
 def includes_word(data, word):
     data_iterator = -1
     word_counter = 0
-    indexes = []
+    indices = []
     for char in word:
         while data_iterator < len(data) - 1:
             data_iterator += 1
             if char == data[data_iterator][0]:
                 word_counter += 1
-                indexes.append(data[data_iterator])
+                indices.append(data[data_iterator])
                 break
 
     if word_counter == len(word):
-        return (True, indexes)
-    return (False, [])
+        return True, indices
+    return False, []
+
 
 def get_slangs_matches(slangs, image_boxes):
     result = []
@@ -33,13 +36,14 @@ def get_slangs_matches(slangs, image_boxes):
             result.append((slang, test[1]))
     return result
 
-def get_boxes_from_image(fileName):
-    d = pytesseract.image_to_boxes(fileName, output_type=Output.DICT)
+
+def get_boxes_from_image(file_name):
+    d = pytesseract.image_to_boxes(file_name, output_type=Output.DICT)
     n_boxes = len(d['char'])
     result = []
     for i in range(n_boxes):
-        (text,x1,y2,x2,y1) = (d['char'][i],d['left'][i],d['top'][i],d['right'][i],d['bottom'][i])
-        result.append((d['char'][i],d['left'][i],d['top'][i],d['right'][i],d['bottom'][i]))
+        (text, x1, y2, x2, y1) = (d['char'][i], d['left'][i], d['top'][i], d['right'][i], d['bottom'][i])
+        result.append((d['char'][i], d['left'][i], d['top'][i], d['right'][i], d['bottom'][i]))
     return result
 
 def get_difference_with(rectangle, visible_rectangles):
@@ -56,16 +60,16 @@ def get_difference_with(rectangle, visible_rectangles):
 def show_crossed_image(word, original_image, fill_color):
     all_boxes = pytesseract.image_to_boxes(original_image, output_type=Output.DICT)
     n_boxes = len(all_boxes['char'])
-    all_boxes_set = { ( all_boxes['char'][i], all_boxes['left'][i],
-                        all_boxes['top'][i], all_boxes['right'][i],
-                        all_boxes['bottom'][i]) for i in range(n_boxes)}
+    all_boxes_set = {(all_boxes['char'][i], all_boxes['left'][i],
+                      all_boxes['top'][i], all_boxes['right'][i],
+                      all_boxes['bottom'][i]) for i in range(n_boxes)}
     marked_letters_set = set(word[1])
     width, height = original_image.size
     draw = ImageDraw.Draw(original_image)
     #print(all_boxes_set)
     for box in all_boxes_set:
         (x1, y2, x2, y1) = (box[1], box[2], box[3], box[4])
-        if(box not in marked_letters_set):
+        if box not in marked_letters_set:
             difference = get_difference_with((box[1], box[2], box[3], box[4]), marked_letters_set)
             #print(difference)
             if len(difference) > 1:
@@ -83,8 +87,9 @@ def show_crossed_image(word, original_image, fill_color):
 
     original_image.show()
 
+
 if __name__ == '__main__':
-    allSlangs = ['lewak', 'heh', 'Zawias']
-    image_path = r'.\memes\metzen.png'
-    matches = get_slangs_matches(allSlangs, get_boxes_from_image(image_path))
+    all_slangs = ['lewak', 'heh', 'Zawias']
+    image_path = "./memes/metzen.png"
+    matches = get_slangs_matches(all_slangs, get_boxes_from_image(image_path))
     show_crossed_image(matches[0], Image.open(image_path), '#16202C')
