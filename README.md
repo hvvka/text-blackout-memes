@@ -77,3 +77,5 @@ The script can we modified to use different source.
 ### [image_analyzer](image_analyzer.py)
 
 // todo
+For now:
+1. Just run `py image_anaylzer.py` and wait for gigabytes of data with mentzen memes
