@@ -1,6 +1,6 @@
 # text-blackout-memes
 
-[![Build Status](https://travis-ci.com/hvvka/cross-out-memes.svg?token=AtJu5RATvaNahLGCYye5&branch=master)](https://travis-ci.com/hvvka/cross-out-memes)
+[![Build Status](https://travis-ci.com/hvvka/text-blackout-memes.svg?branch=master)](https://travis-ci.com/hvvka/text-blackout-memes)
 
 Find out what are possibilities to create a meme 
 by crossing-out letters from text on image.
@@ -48,7 +48,7 @@ Windows
 
 ## Using Docker
 
-Image available at https://hub.docker.com/repository/docker/hvvka/cross-out-memes
+Image available at https://hub.docker.com/repository/docker/hvvka/text-blackout-memes
 
 ### Build locally
 
